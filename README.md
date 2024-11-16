@@ -1,2 +1,1 @@
-# saamiscan
-Saami Scan Web Application
+# Saami-Scan-Center
