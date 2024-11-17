@@ -426,7 +426,7 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-6 col-md-12 col-12">
-						<form class="form" action="#">
+						<!-- <form class="form" action="#">
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="form-group">
@@ -463,6 +463,94 @@
 								</div>								
 							</div>
 						</div>
+						</form> -->
+						<style>
+							.form-select
+							{
+								width:100% ;
+							}
+						</style>
+						<form class="form" id="appointmentForm">
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="form-group">
+										<input type="text" id="name" name="name" placeholder="Name" required="">
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<!-- <select class="pt-1 form-select" id="gender" name="gender" required>
+											<option value="" disabled selected>Select Your Gender</option>
+											<option value="Morning Slot">Male</option>
+											<option value="Afternoon Slot">Female</option>
+											<option value="Evening Slot">Others</option>
+										</select> -->
+										<select class="pt-1 form-select"  id="treatment" name="treatment" required style="z-index:-1;max-height: 350px; overflow: scroll;">
+											<option value="" disabled selected>Treatment</option>
+											<option value="CT Scan">CT Scan</option>
+											<option value="X-Ray">X-Ray</option>
+											<option value="Ultrasound">Ultrasound</option>
+											<option value="Blood Tests">Blood Tests</option>
+											<option value="ECG Tests">ECG Tests</option>
+											<option value="Echocardiogram">Echocardiogram</option>
+											<option value="Labs">Labs</option>
+											<option value="Others">Others</option>
+										</select>
+										
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<input type="text" id="phone" name="phone" placeholder="Phone" required="">
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<input type="text" id="age" name="age" placeholder="Age" required="">
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+									<select class="pt-1 form-select"  id="slot" name="slot" required>
+										<option value="" disabled selected>Select a Time Slot</option>
+										<option value="Morning Slot">Morning Slot</option>
+										<option value="Afternoon Slot">Afternoon Slot</option>
+										<option value="Evening Slot">Evening Slot</option>
+									</select>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+									<!-- <select class="pt-1 form-select"  id="treatment" name="treatment" required style="z-index:-1;max-height: 350px; overflow: scroll;">
+										<option value="" disabled selected>Treatment</option>
+										<option value="CT Scan">CT Scan</option>
+										<option value="X-Ray">X-Ray</option>
+										<option value="Ultrasound">Ultrasound</option>
+										<option value="Blood Tests">Blood Tests</option>
+										<option value="ECG Tests">ECG Tests</option>
+										<option value="Echocardiogram">Echocardiogram</option>
+										<option value="Labs">Labs</option>
+										<option value="Others">Others</option>
+									</select> -->
+									<select class="pt-1 form-select" id="gender" name="gender" required>
+											<option value="" disabled selected>Select Your Gender</option>
+											<option value="Morning Slot">Male</option>
+											<option value="Afternoon Slot">Female</option>
+											<option value="Evening Slot">Others</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<div class="form-group">
+										<textarea id="description" name="description" placeholder="Enter Additional Details" required=""></textarea>
+									</div>
+								</div>										
+								<div class="col-12">
+									<div class="form-group login-btn">
+										<button class="btn" type="submit">Book an Appointment</button>
+									</div>
+								</div>
+							</div>
 						</form>
 					</div>
 					<div class="col-lg-6 col-md-12 ">
@@ -590,6 +678,35 @@
 			const yearSpan = document.getElementById("year");
 			const currentYear = new Date().getFullYear();
 			yearSpan.textContent = currentYear;
+		</script>		
+		<script>
+			document.getElementById("appointmentForm").addEventListener("submit", function (event) {
+				event.preventDefault();
+	
+				const name = document.getElementById("name").value;
+				const gender = document.getElementById("gender").value;
+				const phone = document.getElementById("phone").value;
+				const age = document.getElementById("age").value;
+				const slot = document.getElementById("slot").value;						
+				const treatment = document.getElementById("treatment").value;
+				const description = document.getElementById("description").value;
+	
+				const message = `
+	Hi, I would like to book an appointment at Saami Scans. Here are my details:
+
+	Name: ${name}
+	Gender: ${gender}
+	Phone: ${phone}
+	Age: ${age}
+	Preferred Slot: ${slot}
+	Treatment: ${treatment}
+	Description: ${description}
+				`.trim();
+	
+				const encodedMessage = encodeURIComponent(message);
+				const whatsappURL = `https://wa.me/+919514700761?text=${encodedMessage}`;
+				window.open(whatsappURL, "_blank");
+			});
 		</script>
         <script src="js/jquery.min.js"></script>
 		<script src="js/jquery-migrate-3.0.0.js"></script>
